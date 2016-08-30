@@ -30,6 +30,17 @@ describe 'Testing scrabble_score' do
 end
 
 
-# describe 'Testing scrabble_hightest_score_from(array_of_words)' do
-#   it 'Highest score '
-# end
+describe 'Testing scrabble_hightest_score_from(array_of_words)' do
+    it 'If "jazzily" and "pazazz" are only words in array_of_words, jazzily has max value' do
+
+        expect(Scrabble::Scoring.highest_score_from(["jazzily", "pazazz"])).must_equal("jazzily")
+    end
+
+    it 'If "wiz" and "jump" are only words in array_of_words, wiz has max value' do
+        expect(Scrabble::Scoring.highest_score_from(["wiz", "jump"])).must_equal("wiz")
+    end
+
+    it 'If "juku" and "jump" are only words in array_of_words and "juku" comes first, juku has max value' do
+        expect(Scrabble::Scoring.highest_score_from(["juku", "jump"])).must_equal("juku")
+    end
+end
