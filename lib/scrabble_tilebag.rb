@@ -11,10 +11,10 @@ class Scrabble::Tilebag
         # ap tiles
         @tilebag = Scrabble::TILES.flatten.shuffle
         #ap @tilebag
-        @player_hand = []
     end
 
     def draw_tiles(num)
+        @player_hand = []
         raise ArgumentError if num.class != Fixnum
         @player_hand << @tilebag.pop(num)
     end

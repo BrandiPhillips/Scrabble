@@ -14,6 +14,7 @@ class Scrabble::Player
       @name = name
       @total_score = 0
       @plays = []
+      @tiles = []
 
     end
 
@@ -33,7 +34,6 @@ class Scrabble::Player
       return @plays
     end
 
-
     def total_score
       return @total_score
     end
@@ -49,5 +49,18 @@ class Scrabble::Player
     def highest_word_score
       return Scrabble::Scoring.score(@best_word)
     end
+
+    def tiles
+      @tiles
+    end
+
+    def player_draw_tiles(game_bag)
+      raise ArgumentError if @tiles.length > 7
+
+      until @tiles.length == 7 do
+        @tiles << game_bag.draw_tiles(1)
+      end
+    end
+
 
 end

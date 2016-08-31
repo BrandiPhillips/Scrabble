@@ -11,8 +11,6 @@ describe 'Testing Scrabble::Player.name' do
     end
 end
 
-
-
 describe 'Testing play_word when a player plays a new word' do
     it 'must return false when player plays a new word and they have already won(score >= 100)' do
         brandi = Scrabble::Player.new("Brandi")
@@ -30,8 +28,6 @@ describe 'Testing play_word when a player plays a new word' do
         expect(brandi.plays).must_include("jump")
     end
 end
-
-
 
 describe 'Testing plays method to return array of words player has played' do
     it 'must return array of words played by player when Scrabble::Player.plays is called' do
@@ -63,19 +59,39 @@ describe 'Testing if the player has won or not' do
     end
 end
 
-
-
-describe 'returns highest scoring played word' do
+describe 'Testing returns highest scoring played word' do
     it 'must return highest scored played word' do
         joey = Scrabble::Player.new("Joey")
         expect(joey.highest_scoring_word).must_equal("monkey") if joey.plays == ["monkey", "hippo"]
     end
 end
 
-
-describe 'returns highest word score' do
+describe 'Testing returns highest word score' do
     it 'must return the score of the highest scoring word' do
         joey = Scrabble::Player.new("Joey")
         expect(joey.highest_word_score).must_equal(15) if joey.plays == ["monkey", "hippo"]
     end
+end
+
+describe 'Testing player tiles method' do
+    it 'must not be greater than 7 tiles' do
+      joey = Scrabble::Player.new("Joey")
+      expect (joey.tiles.length).must_be :<=, 7
+      expect (joey.tiles.length).must_be :>=, 0
+    end
+    it 'must not be greater than 7 tiles' do
+      joey = Scrabble::Player.new("Joey")
+      expect (joey.tiles).must_be_kind_of Array
+    end
+
+end
+
+describe 'Testing player draw_tiles method' do
+      it  'must take tiles from game_tilebag to tile_hand' do
+        game_tilebag = Scrabble::Tilebag.new
+        joey = Scrabble::Player.new("Joey")
+        joey.player_draw_tiles(game_tilebag)
+        expect (joey.tiles.length).must_equal(7)
+      end
+
 end
