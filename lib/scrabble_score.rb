@@ -16,9 +16,7 @@ class Scrabble::Scoring
         word_array = word.split(//)
         word_array.each do |letter|
             Scrabble::LETTER_SCORE.each do |key, value|
-                if key.include?(letter.to_s)
-                    word_value += value
-                end
+              word_value += value if key.include?(letter.to_s)
             end
         end
         return word_value
@@ -30,43 +28,36 @@ class Scrabble::Scoring
       array_of_words = array_of_words
       word_score = []
       max_words = []
+
       # iterate over the array of words to get the score of each
-      array_of_words.each do |word|
-        word_score << Scrabble::Scoring.score(word)
-      end
+      array_of_words.each {|word| word_score << Scrabble::Scoring.score(word)}
+
       # find the max score
       high_score = word_score.max
-      puts high_score
+      # puts high_score
 
       # see if there are more than one word with same max score and return an array of those words to evaluate further
       index = 0
       word_score.each do |score|
-        if score == high_score
-          max_words << array_of_words[index]
-        end
-          index += 1
+        max_words << array_of_words[index] if score == high_score
+        index += 1
       end
-      print max_words
+      # print max_words
 
       winner = false
       # evaluating words
-      if max_words.length == 1
-        winner = max_words[0]
-      elsif max_words.length >= 2
+      winner = max_words[0] if max_words.length == 1
+
+      if winner == false
         max_words.each do |word|
-          if word.length == 7
-            winner = word
-          end
+          winner = word if word.length == 7
         end
       end
 
-      # evaluate more words
-      if winner = false
-        winner = max_words.min_by {|x| x.length}
-      elsif max_words
-        winner =
-      end
+      # evaluate more words returns shortest word out of high scores, will return the first index if there are multiple high score words with same character length.
+      winner = max_words.min_by {|x| x.length} if winner == false
 
+      return winner
     end
 
 
