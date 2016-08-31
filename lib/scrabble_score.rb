@@ -9,7 +9,7 @@ class Scrabble::Scoring
         raise ArgumentError if word.class != String
         raise ArgumentError if !word.match(/^[[:alpha:]]+$/)
         word_value = 0
-        word.length == 7 ? word_value += 50 : 0
+        word.length == Scrabble::MAX_LETTERS ? word_value += 50 : 0
         word.downcase!
 
         ## Loop to compare letters with letter values
@@ -44,20 +44,20 @@ class Scrabble::Scoring
       end
       # print max_words
 
-      winner = false
+      best_word = false
       # evaluating words
-      winner = max_words[0] if max_words.length == 1
+      best_word = max_words[0] if max_words.length == 1
 
-      if winner == false
+      if best_word == false
         max_words.each do |word|
-          winner = word if word.length == 7
+          best_word = word if word.length == Scrabble::MAX_LETTERS
         end
       end
 
       # evaluate more words returns shortest word out of high scores, will return the first index if there are multiple high score words with same character length.
-      winner = max_words.min_by {|x| x.length} if winner == false
+      best_word = max_words.min_by {|x| x.length} if best_word == false
 
-      return winner
+      return best_word
     end
 
 
@@ -66,7 +66,7 @@ end
 # puts Scrabble::Scoring.score("jazzily")
 # puts Scrabble::Scoring.score("pazazz")
 # puts Scrabble::Scoring.score("word")
-# puts Scrabble::Scoring.score("jump")
-puts Scrabble::Scoring.highest_score_from(["jump", "word", "quick", "jeez"])
+puts Scrabble::Scoring.score("jump")
+#puts Scrabble::Scoring.highest_score_from(["jump", "word", "quick", "jeez"])
 # puts Scrabble::Scoring.score("3abd34")
 # Scrabble::Scoring.score("sevenmn")
