@@ -1,5 +1,5 @@
 #scrabble scoring
-require_relative 'scrabble'
+require_relative '../scrabble'
 
 class Scrabble::Scoring
     extend Scrabble
@@ -66,7 +66,7 @@ end
 # puts Scrabble::Scoring.score("jazzily")
 # puts Scrabble::Scoring.score("pazazz")
 # puts Scrabble::Scoring.score("word")
-puts Scrabble::Scoring.score("jump")
+#puts Scrabble::Scoring.score("jump")
 #puts Scrabble::Scoring.highest_score_from(["jump", "word", "quick", "jeez"])
 # puts Scrabble::Scoring.score("3abd34")
 # Scrabble::Scoring.score("sevenmn")

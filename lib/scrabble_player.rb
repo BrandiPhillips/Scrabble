@@ -1,5 +1,7 @@
 ## Scrabble Player class
-require_relative 'scrabble'
+require_relative '../scrabble'
+require_relative 'scrabble_tilebag'
+require_relative 'scrabble_score'
 
 class Scrabble::Player
     extend Scrabble
