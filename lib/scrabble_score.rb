@@ -25,8 +25,57 @@ class Scrabble::Scoring
     end
 
 
-end
 
+    def self.highest_score_from(array_of_words)
+      array_of_words = array_of_words
+      word_score = []
+      max_words = []
+      # iterate over the array of words to get the score of each
+      array_of_words.each do |word|
+        word_score << Scrabble::Scoring.score(word)
+      end
+      # find the max score
+      high_score = word_score.max
+      puts high_score
+
+      # see if there are more than one word with same max score and return an array of those words to evaluate further
+      index = 0
+      word_score.each do |score|
+        if score == high_score
+          max_words << array_of_words[index]
+        end
+          index += 1
+      end
+      print max_words
+
+      winner = false
+      # evaluating words
+      if max_words.length == 1
+        winner = max_words[0]
+      elsif max_words.length >= 2
+        max_words.each do |word|
+          if word.length == 7
+            winner = word
+          end
+        end
+      end
+
+      # evaluate more words
+      if winner = false
+        winner = max_words.min_by {|x| x.length}
+      elsif max_words
+        winner =
+      end
+
+    end
+
+
+end
 #
+# puts Scrabble::Scoring.score("jazzily")
+# puts Scrabble::Scoring.score("pazazz")
+# puts Scrabble::Scoring.score("word")
+# puts Scrabble::Scoring.score("jump")
+puts Scrabble::Scoring.highest_score_from(["jump", "word", "quick", "jeez"])
 # puts Scrabble::Scoring.score("3abd34")
 # Scrabble::Scoring.score("sevenmn")
