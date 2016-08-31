@@ -16,12 +16,12 @@ end
 describe 'Testing play_word when a player plays a new word' do
     it 'must return false when player plays a new word and they have already won(score >= 100)' do
         brandi = Scrabble::Player.new("Brandi")
-        expect(brandi.play_word("jump")).must_equal(false) if total_score >= 100
+        expect(brandi.play_word("jump")).must_equal(false) if brandi.total_score >= 100
     end
 
     it 'must return score of word when player plays a new word' do
         brandi = Scrabble::Player.new("Brandi")
-        expect(brandi.play_word("jump")).must_equal(15) if total_score < 100
+        expect(brandi.play_word("jump")).must_equal(15) if brandi.total_score < 100
     end
 
     it 'must be push the word into the plays array' do

@@ -2,6 +2,9 @@
 
 module Scrabble
     MAX_LETTERS = 7
+
+    MAX_SCORE = 100
+
     LETTER_SCORE = {
         ["a", "e", "i", "o", "u", "l", "n", "r", "s", "t"] => 1,
         ["d", "g"] => 2,
