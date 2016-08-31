@@ -1,5 +1,5 @@
 #scrabble scoring
- require_relative '../scrabble'
+require_relative 'scrabble'
 
 class Scrabble::Scoring
     extend Scrabble

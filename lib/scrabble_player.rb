@@ -1,6 +1,5 @@
 ## Scrabble Player class
-require_relative '../scrabble'
-require_relative 'scrabble_player'
+require_relative 'scrabble'
 
 class Scrabble::Player
     extend Scrabble
@@ -48,6 +47,5 @@ class Scrabble::Player
     def highest_word_score
       return Scrabble::Scoring.score(@best_word)
     end
-
 
 end
