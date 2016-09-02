@@ -5,7 +5,7 @@ module Scrabble
     MAX_LETTERS = 7
 
     MAX_SCORE = 100
-    
+
     LETTER_SCORE = {
        ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"] => 1,
        ["D", "G"] => 2,
@@ -45,8 +45,9 @@ module Scrabble
         ["Z"]
     ]
 
-    DICTIONARY = ["jump", "monkey", "donkey", "jazzily", "pazazz", "word", "zack", "jax"]
+    WORDS = ["JUMP", "MONKEY", "DONKEY", "JAZZILY", "PAZAZZ", "WORD", "ZACK", "JAX", "AGE", "ASK", "BABY", "BASE", "BESIDE", "BRIGHT", "BUSINESS", "BUY", "CASE", "CATCH", "CAUGHT", "CAUGHTCHOOSE", "CIRCLE", "CLEAR", "COLOR", "CHILD", "COPY", "CORRECT", "COULDN'T", "DIFFERENCE", "DIRECTION", "DRIED", "EASILY", "EDGE", "EGG", "EIGHT", "ENERGY", "ENGLAND", "ESPECIALLY", "EUROPE", "EXACTLY", "EXCEPT", "EXPLAIN", "FAMOUS", "FARM", "FELL", "FIGURE", "FLAT", "FLY", "FOREST", "FREE", "FRENCH", "FUN", "GEORGE", "GOVERNMENT", "GRASS", "GREW", "HAIR", "HAPPY", "HE'S", "HEAT", "HISTORY", "HUMAN", "I'VE", "INCH", "INFORMATION", "IRON", "JIM", "JOE", "KING", "LARGER", "LATE", "LEG", "LENGTH", "LISTEN", "LOST", "LOT", "LOWER", "MACHINE", "MARK", "MAYBE", "MEASURE", "MEET", "MIDDLE", "MILK", "MINUTE", "MODERN", "MOMENT", "MONTH", "MOUTH", "NATURAL", "NEARLY", "NECESSARY", "NEW", "YORK", "NORTH", "OBJECT", "OCEAN", "OIL", "PAY", "PER", "PLAN", "PLANE", "PRESENT", "PRODUCT", "RATHER", "REACH", "REASON", "RECORD", "RUNNING", "SEEMS", "SENT", "SEVEN", "SHAPE", "SIDES", "SINGLE", "SKIN", "SLEEP", "SMALLER", "SOFT", "SOIL", "SOUTH", "SPEAK", "SPEED", "SPRING", "SQUARE", "STAR", "STEP", "STORE", "STRAIGHT", "STRANGE", "STREET", "SUBJECT", "SUPPOSE", "TEACHER", "THOUSAND", "THUS", "TOM", "TRAVEL", "TRIP", "TROUBLE", "UNIT", "VILLAGE", "WALL", "WAR", "WASN'T", "WEEK", "WHOSE", "WINDOW", "WISH", "WOMEN", "WON'T", "WOOD", "WROTE", "YELLOW", "YOU'RE", "YOURSELF"]
+
 
 end
 
-#ap Scrabble::TILES
+#ap Scrabble::DICTIONARY[55].class

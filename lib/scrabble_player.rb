@@ -2,6 +2,7 @@
 require_relative '../scrabble'
 require_relative 'scrabble_tilebag'
 require_relative 'scrabble_score'
+require_relative 'scrabble_dictionary'
 
 class Scrabble::Player
     extend Scrabble
@@ -17,44 +18,49 @@ class Scrabble::Player
       @tiles = []
     end
 
+
     # method that puts played word into plays array, returns false if total_score >= 100 or returns word score:
     def play_word(word)
         return false if @total_score >= Scrabble::MAX_SCORE
-        ### CHECK IF PLAYER HAS THOSE TILES
-            ## IF NO - RAISE ERROR
-            ## IF YES - PROCEED
-        @plays << word
+
         word_letters = word.upcase.split(//)
         raise ArgumentError if (word_letters - @tiles) != []
+
+        @plays << word
 
         ### - TAKE EACH LETTER FROM TILES IN HAND
         word_letters.each do |delete|
             @tiles.delete_at(@tiles.index(delete))
         end
 
+
         word_score = Scrabble::Scoring.score(word)
         @total_score += word_score
         return word_score
     end
+
+
 
     #checks to see if player has reached max score of 100
     def won?
         @total_score >= Scrabble::MAX_SCORE ? true : false
     end
 
+
+
     #returns highest scoring word a player has played
     def highest_scoring_word
         @best_word = Scrabble::Scoring.highest_score_from(@plays)
     end
 
-    # def plays
-    #     @plays
-    # end
+
+
 
     #returns highest score players has gotten from a word
     def highest_word_score
         return Scrabble::Scoring.score(@best_word)
     end
+
 
 
     # draws tiles and fills up players hand to 7
@@ -67,8 +73,9 @@ class Scrabble::Player
     end
 end
 
- player = Scrabble::Player.new("player")
- game_bag = Scrabble::Tilebag.new
- player.player_draw_tiles(game_bag)
- ap player.tiles
-ap player.plays
+
+#  player = Scrabble::Player.new("player")
+#  game_bag = Scrabble::Tilebag.new
+#  player.player_draw_tiles(game_bag)
+#  ap player.tiles
+# ap player.plays
