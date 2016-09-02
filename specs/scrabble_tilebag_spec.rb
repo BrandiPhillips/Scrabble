@@ -18,19 +18,14 @@ describe 'Testing Scrabble::Tilebag.draw_tiles(num)' do
 
   it 'must return an array of random tiles removed from default set' do
     game_tilebag = Scrabble::Tilebag.new
-    player1_hand = game_tilebag.draw_tiles(4)
-    expect (player1_hand).must_be_kind_of Array
+    player1_hand = game_tilebag.draw_tiles
+    expect (player1_hand).must_be_kind_of String
   end
 
   it 'must remove tiles from game_tilebag' do
     game_tilebag = Scrabble::Tilebag.new
-    player1_hand = game_tilebag.draw_tiles(4)
-    expect (game_tilebag.tilebag.length).must_equal(94)
-  end
-
-  it 'It must raise an IllegalArgument if given a non-String' do
-      game_tilebag = Scrabble::Tilebag.new
-      expect (proc {game_tilebag.draw_tiles("four")} ).must_raise ArgumentError
+    player1_hand = game_tilebag.draw_tiles
+    expect (game_tilebag.tilebag.length).must_equal(97)
   end
 
 end
@@ -39,7 +34,7 @@ describe 'Testing Scrabble::Tilebag.tiles_remaining' do
 
   it 'must return the number of remaining tiles available' do
     game_tilebag = Scrabble::Tilebag.new
-    player1_hand = game_tilebag.draw_tiles(4)
+    player1_hand = game_tilebag.draw_tiles
     expect (game_tilebag.tiles_remaining).must_equal(game_tilebag.tilebag.length)
   end
 

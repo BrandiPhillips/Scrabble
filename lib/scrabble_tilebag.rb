@@ -4,19 +4,14 @@ require 'awesome_print'
 
 class Scrabble::Tilebag
     extend Scrabble
-    attr_reader :tilebag, :player_hand
+    attr_reader :tilebag
 
     def initialize
-        # tiles = Scrabble::TILES
-        # ap tiles
         @tilebag = Scrabble::TILES.flatten.shuffle
-        #ap @tilebag
     end
 
-    def draw_tiles(num)
-        @player_hand = []
-        raise ArgumentError if num.class != Fixnum
-        @player_hand << @tilebag.pop(num)
+    def draw_tiles
+        @tilebag.pop
     end
 
     def tiles_remaining

@@ -17,13 +17,42 @@ describe 'Testing play_word when a player plays a new word' do
         expect(brandi.play_word("jump")).must_equal(false) if brandi.total_score >= 100
     end
 
+
+    ### testing if player has the tiles they are trying to play
+    it 'the word\'s characters must be in the player\'s tile hand' do
+        brandi = Scrabble::Player.new("Brandi")
+        game_bag = Scrabble::Tilebag.new
+        brandi.player_draw_tiles(game_bag)
+        expect(proc {brandi.play_word("word")} ).must_raise ArgumentError unless (("word".split(//)) - brandi.tiles).empty? == true
+    end
+
+
+
+    it 'must remove tiles from hand after a word is played' do
+        brandi = Scrabble::Player.new("Brandi")
+        game_bag = Scrabble::Tilebag.new
+        brandi.player_draw_tiles(game_bag)
+
+        original_hand = brandi.tiles
+        word = brandi.tiles[0] + brandi.tiles[1] + brandi.tiles[2]
+        brandi.play_word(word)
+        word_tiles = word.split(//)
+        new_hand = brandi.tiles
+        expect((new_hand + word_tiles).sort).must_equal(original_hand.sort)
+    end
+
+
     it 'must return score of word when player plays a new word' do
         brandi = Scrabble::Player.new("Brandi")
+        game_tilebag = Scrabble::Tilebag.new
+        brandi.player_draw_tiles(game_tilebag)
         expect(brandi.play_word("jump")).must_equal(15) if brandi.total_score < 100
     end
 
     it 'must be push the word into the plays array' do
         brandi = Scrabble::Player.new("Brandi")
+        game_tilebag = Scrabble::Tilebag.new
+        brandi.player_draw_tiles(game_tilebag)
         brandi.play_word("jump")
         expect(brandi.plays).must_include("jump")
     end

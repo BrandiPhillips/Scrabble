@@ -45,6 +45,7 @@ module Scrabble
         ["Z"]
     ]
 
+    DICTIONARY = ["jump", "monkey", "donkey", "jazzily", "pazazz", "word", "zack", "jax"]
 
 end
 
