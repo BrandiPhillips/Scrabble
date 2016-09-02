@@ -23,16 +23,14 @@ class Scrabble::Player
         ### CHECK IF PLAYER HAS THOSE TILES
             ## IF NO - RAISE ERROR
             ## IF YES - PROCEED
-
-        word_letters = word.split(//)
+        @plays << word
+        word_letters = word.upcase.split(//)
         raise ArgumentError if (word_letters - @tiles) != []
 
         ### - TAKE EACH LETTER FROM TILES IN HAND
         word_letters.each do |delete|
             @tiles.delete_at(@tiles.index(delete))
         end
-
-        @plays << word
 
         word_score = Scrabble::Scoring.score(word)
         @total_score += word_score

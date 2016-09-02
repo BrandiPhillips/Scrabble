@@ -10,7 +10,7 @@ class Scrabble::Scoring
         raise ArgumentError if !word.match(/^[[:alpha:]]+$/)
         word_value = 0
         word.length == Scrabble::MAX_LETTERS ? word_value += 50 : 0
-        word.downcase!
+        word.upcase!
 
         ## Loop to compare letters with letter values
         word_array = word.split(//)

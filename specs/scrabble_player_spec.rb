@@ -14,7 +14,7 @@ end
 describe 'Testing play_word when a player plays a new word' do
     it 'must return false when player plays a new word and they have already won(score >= 100)' do
         brandi = Scrabble::Player.new("Brandi")
-        expect(brandi.play_word("jump")).must_equal(false) if brandi.total_score >= 100
+        expect(brandi.play_word("JUMP")).must_equal(false) if brandi.total_score >= 100
     end
 
 
@@ -33,10 +33,10 @@ describe 'Testing play_word when a player plays a new word' do
         game_bag = Scrabble::Tilebag.new
         brandi.player_draw_tiles(game_bag)
 
-        original_hand = brandi.tiles
+        original_hand = brandi.tiles.clone
         word = brandi.tiles[0] + brandi.tiles[1] + brandi.tiles[2]
         brandi.play_word(word)
-        word_tiles = word.split(//)
+        word_tiles = word.upcase.split(//)
         new_hand = brandi.tiles
         expect((new_hand + word_tiles).sort).must_equal(original_hand.sort)
     end
@@ -46,24 +46,34 @@ describe 'Testing play_word when a player plays a new word' do
         brandi = Scrabble::Player.new("Brandi")
         game_tilebag = Scrabble::Tilebag.new
         brandi.player_draw_tiles(game_tilebag)
-        expect(brandi.play_word("jump")).must_equal(15) if brandi.total_score < 100
+        original_hand = brandi.tiles.clone
+
+        word = brandi.tiles[0] + brandi.tiles[1] + brandi.tiles[2]
+        expect(brandi.play_word(word)).must_equal(Scrabble::Scoring.score(word)) if brandi.total_score < Scrabble::MAX_SCORE
     end
 
     it 'must be push the word into the plays array' do
         brandi = Scrabble::Player.new("Brandi")
         game_tilebag = Scrabble::Tilebag.new
         brandi.player_draw_tiles(game_tilebag)
-        brandi.play_word("jump")
-        expect(brandi.plays).must_include("jump")
+        original_hand = brandi.tiles.clone
+        word = brandi.tiles[0] + brandi.tiles[1] + brandi.tiles[2]
+        brandi.play_word(word)
+        expect(brandi.plays).must_include(word)
     end
 end
 
 describe 'Testing plays method to return array of words player has played' do
     it 'must return array of words played by player when Scrabble::Player.plays is called' do
         joey = Scrabble::Player.new("Joey")
-        joey.play_word("monkey")
-        joey.play_word("hippo")
-        expect(joey.plays).must_equal(["monkey", "hippo"])
+        game_tilebag = Scrabble::Tilebag.new
+        joey.player_draw_tiles(game_tilebag)
+        original_hand = joey.tiles.clone
+        word1 = joey.tiles[0] + joey.tiles[1] + joey.tiles[2]
+        word2 = joey.tiles[3] + joey.tiles[4] + joey.tiles[5]
+        joey.play_word(word1)
+        joey.play_word(word2)
+        expect(joey.plays).must_equal([word1, word2])
     end
 end
 
@@ -71,7 +81,7 @@ end
 describe 'Testing the total score a player has' do
     it 'must return the total score of all the words played' do
         joey = Scrabble::Player.new("Joey")
-        expect(joey.total_score).must equal(27) if joey.plays == ["monkey", "hippo"]
+        expect(joey.total_score).must equal(27) if joey.plays == ["MONKEY", "HIPPO"]
     end
 end
 
@@ -91,14 +101,14 @@ end
 describe 'Testing returns highest scoring played word' do
     it 'must return highest scored played word' do
         joey = Scrabble::Player.new("Joey")
-        expect(joey.highest_scoring_word).must_equal("monkey") if joey.plays == ["monkey", "hippo"]
+        expect(joey.highest_scoring_word).must_equal("MONKEY") if joey.plays == ["MONKEY", "HIPPO"]
     end
 end
 
 describe 'Testing returns highest word score' do
     it 'must return the score of the highest scoring word' do
         joey = Scrabble::Player.new("Joey")
-        expect(joey.highest_word_score).must_equal(15) if joey.plays == ["monkey", "hippo"]
+        expect(joey.highest_word_score).must_equal(15) if joey.plays == ["MONKEY", "HIPPO"]
     end
 end
 
